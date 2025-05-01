@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Score Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .result-card {
+            background-color: #1e3c57;
+            border: none;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0px 0px 30px rgba(0,0,0,0.3);
+        }
+
+        .result-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .range-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container d-flex justify-content-center">
+        <div class="result-card text-center">
+            <h2 class="mb-4">Your Credit Score Result</h2>
+
+            {% if prediction_result == 'Good' %}
+                <img src="{{ url_for('static', filename='images/good.png') }}" alt="Good Score" class="result-image">
+                <h3 class="text-success">🌟 {{ prediction_result }}</h3>
+                <p class="text-light">Excellent credit standing! Keep up your strong financial habits. ✅</p>
+            {% elif prediction_result == 'Poor' %}
+                <img src="{{ url_for('static', filename='images/poor.png') }}" alt="Poor Score" class="result-image">
+                <h3 class="text-danger">⚠️ {{ prediction_result }}</h3>
+                <p class="text-warning">Work on reducing debts and making timely payments.</p>
+            {% elif prediction_result == 'Standard' %}
+                <img src="{{ url_for('static', filename='images/standard.png') }}" alt="Standard Score" class="result-image">
+                <h3 class="text-warning">🟡 {{ prediction_result }}</h3>
+                <p class="text-light">You're doing okay. Aim for consistent payments and better credit mix.</p>
+            {% else %}
+                <h3>{{ prediction_result }}</h3>
+            {% endif %}
+
+            <img src="{{ url_for('static', filename='images/credit_score_ranges.png') }}" alt="Credit Score Ranges" class="range-image">
+
+            <a href="/" class="btn btn-outline-light mt-4">🔁 Try Another</a>
+        </div>
+    </div>
+
+    <div class="footer">© 2025 Credit Insight by Sravani</div>
+
+</body>
+</html>
